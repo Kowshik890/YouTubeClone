@@ -26,6 +26,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HeaderComponent } from './components/header/header.component';
 import { UploadVideoComponent } from './components/upload-video/upload-video.component';
 import { SaveVideoDetailsComponent } from './components/save-video-details/save-video-details.component';
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
+import { AuthConfigModule } from './auth/auth-config.module';
 
 
 
@@ -35,6 +37,7 @@ import { SaveVideoDetailsComponent } from './components/save-video-details/save-
     UploadVideoComponent,
     HeaderComponent,
     SaveVideoDetailsComponent,
+    VideoPlayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { SaveVideoDetailsComponent } from './components/save-video-details/save-
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AuthConfigModule
   ],
   providers: [],
   bootstrap: [AppComponent]

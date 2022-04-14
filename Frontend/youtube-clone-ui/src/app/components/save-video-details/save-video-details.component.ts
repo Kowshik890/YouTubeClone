@@ -5,6 +5,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from 'src/app/services/video.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { VideoDTO } from 'src/app/datatransferobject/video-dto';
 
 @Component({
   selector: 'app-save-video-details',
@@ -25,17 +26,22 @@ export class SaveVideoDetailsComponent implements OnInit {
   selectedFileName: any = '';
   videoId: any = '';
   fileSelected: boolean = false;
+  videoURL!: string;
+  thumbnailURL!: string;
 
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private matSnackBar: MatSnackBar) { 
     this.videoId = this.activatedRoute.snapshot.params['videoId'];
+    this.videoService.getVideoDetails(this.videoId)
+    .subscribe(data => {
+      this.videoURL = data.videoUrl;
+      this.thumbnailURL = data.thumbnailUrl;
+    })
     this.saveVideoDetailsForm = new FormGroup({
       title: this.title,
       description: this.description,
       videoStatus: this.videoStatus
     })
-  }
-
- 
+  } 
 
   ngOnInit(): void {
   }
@@ -74,6 +80,22 @@ export class SaveVideoDetailsComponent implements OnInit {
       // show an upload notification
       this.matSnackBar.open("Thumbnail upload successfully!", "OK");
     })
+  }
+
+  saveVideoDetails() {
+    const videoMetaData: VideoDTO = {
+      id: this.videoId,
+      title: this.saveVideoDetailsForm.get('title')?.value,
+      description: this.saveVideoDetailsForm.get('description')?.value,
+      tags: this.tags,
+      videoUrl: this.videoURL,
+      videoStatus: this.saveVideoDetailsForm.get('videoStatus')?.value,
+      thumbnailUrl: this.thumbnailURL
+    }
+    this.videoService.saveVideoDetails(videoMetaData)
+    .subscribe(data => {
+      this.matSnackBar.open("Video metadata saved successfully", "OK");
+    });
   }
 
 }

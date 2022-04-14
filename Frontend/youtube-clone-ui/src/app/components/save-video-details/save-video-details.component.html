@@ -58,12 +58,12 @@
             </div>
 
             <div>
-                <button type="submit" mat-raised-button color="primany">Save</button>
+                <button type="submit" mat-raised-button color="primany" (click)="saveVideoDetails()">Save</button>
             </div>
         </form>
     </div>
 
-    <div fxFlex="30%">Video Player</div>
+    <div fxFlex="30%"><app-video-player [videoURL]="videoURL"></app-video-player></div>
 
     <div fxFlex="20%">Hi</div>
 </div>
