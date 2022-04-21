@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,6 +28,8 @@ import { UploadVideoComponent } from './components/upload-video/upload-video.com
 import { SaveVideoDetailsComponent } from './components/save-video-details/save-video-details.component';
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { AuthConfigModule } from './auth/auth-config.module';
+import { VideoDetailComponent } from './components/video-detail/video-detail.component';
+import { AuthInterceptor, AuthModule  } from 'angular-auth-oidc-client';
 
 
 
@@ -38,12 +40,21 @@ import { AuthConfigModule } from './auth/auth-config.module';
     HeaderComponent,
     SaveVideoDetailsComponent,
     VideoPlayerComponent,
+    VideoDetailComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule,
     FormsModule,
+    /*AuthModule.forRoot({
+      config: {
+        secureRoutes: ['http://localhost:8080/'],
+        customParamsAuthRequest: {
+          audience: 'http://localhost:8080'
+      }
+      }
+    }),*/
     HttpClientModule,
     NgxFileDropModule,
     AppRoutingModule,
@@ -64,7 +75,7 @@ import { AuthConfigModule } from './auth/auth-config.module';
     MatSnackBarModule,
     AuthConfigModule
   ],
-  providers: [],
+  providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

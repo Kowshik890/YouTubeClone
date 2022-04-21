@@ -14,6 +14,7 @@ public class VideoService {
 
     private final AWSS3Service awss3Service;
     private final VideoRepository videoRepository;
+    private final UserService userService;
 
     public UploadVideoResponse uploadVideo(MultipartFile file) {
         // Upload file to AWS S3
@@ -63,14 +64,93 @@ public class VideoService {
     public VideoDTO getVideoDetails(String videoId) {
         Video savedVideo = findVideoById(videoId);
 
+        incrementViewCount(savedVideo);
+        userService.addVideoToHistory(videoId);
+
+        return mapToVideoDTO(savedVideo);
+    }
+
+    public void incrementViewCount(Video savedVideo) {
+        savedVideo.incrementViewCount();
+        videoRepository.save(savedVideo);
+    }
+
+    public VideoDTO likeVideo(String videoId) {
+        Video videoById = findVideoById(videoId);
+
+        // Increment like count
+        // If user already liked the video, then decrement like count
+        // like - 0, dislike - 0
+        // like - 1, dislike - 0
+        // like - 0, dislike - 0
+
+        // If user already disliked the video, now want to like it, then increment like count and decrement dislike count
+        // like - 0, dislike - 1
+        // like - 1, dislike - 0
+
+        if(userService.ifLikedVideo(videoId)) {
+            videoById.decrementLikes();
+            userService.removeFromLikedVideos(videoId);
+        } else if(userService.ifDislikedVideo(videoId)) {
+            videoById.decrementDislikes();
+            userService.removeFromDislikedVideos(videoId);
+
+            videoById.incrementLikes();
+            userService.addToLikedVideos(videoId);
+        } else {
+            videoById.incrementLikes();
+            userService.addToLikedVideos(videoId);
+        }
+
+        videoRepository.save(videoById);
+
+        return mapToVideoDTO(videoById);
+    }
+
+    public VideoDTO dislikeVideo(String videoId) {
+        Video videoById = findVideoById(videoId);
+
+        // Increment dislike count
+        // If user already disliked the video, then decrement dislike count
+        // dislike - 0, like - 0
+        // dislike - 1, like - 0
+        // dislike - 0, like - 0
+
+        // If user already liked the video, now want to dislike it, then increment dislike count and decrement like count
+        // dislike - 0, like - 1
+        // dislike - 1, like - 0
+
+        if(userService.ifDislikedVideo(videoId)) {
+            videoById.decrementDislikes();
+            userService.removeFromDislikedVideos(videoId);
+        } else if(userService.ifLikedVideo(videoId)) {
+            videoById.decrementLikes();
+            userService.removeFromLikedVideos(videoId);
+
+            videoById.incrementDislikes();
+            userService.addToDislikedVideos(videoId);
+        } else {
+            videoById.incrementDislikes();
+            userService.addToDislikedVideos(videoId);
+        }
+
+        videoRepository.save(videoById);
+
+        return mapToVideoDTO(videoById);
+    }
+
+    private VideoDTO mapToVideoDTO(Video videoById) {
         VideoDTO videoDTO = new VideoDTO();
-        videoDTO.setId(savedVideo.getId());
-        videoDTO.setTitle(savedVideo.getTitle());
-        videoDTO.setDescription(savedVideo.getDescription());
-        videoDTO.setTags(savedVideo.getTags());
-        videoDTO.setVideoUrl(savedVideo.getVideoUrl());
-        videoDTO.setThumbnailUrl(savedVideo.getThumbnailUrl());
-        videoDTO.setVideoStatus(savedVideo.getVideoStatus());
+        videoDTO.setId(videoById.getId());
+        videoDTO.setTitle(videoById.getTitle());
+        videoDTO.setDescription(videoById.getDescription());
+        videoDTO.setTags(videoById.getTags());
+        videoDTO.setVideoUrl(videoById.getVideoUrl());
+        videoDTO.setThumbnailUrl(videoById.getThumbnailUrl());
+        videoDTO.setVideoStatus(videoById.getVideoStatus());
+        videoDTO.setLikeCount(videoById.getLikes().get());
+        videoDTO.setDislikeCount(videoById.getDislikes().get());
+        videoDTO.setViewCount(videoById.getViewCount().get());
         return videoDTO;
     }
 }

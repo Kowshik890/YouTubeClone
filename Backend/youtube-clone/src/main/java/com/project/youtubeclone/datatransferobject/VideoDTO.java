@@ -10,7 +10,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VideoDTO {
+public class  VideoDTO {
     private String id;
     private String title;
     private String description;
@@ -18,4 +18,7 @@ public class VideoDTO {
     private String videoUrl;
     private VideoStatus videoStatus;
     private String thumbnailUrl;
+    private Integer likeCount;
+    private Integer dislikeCount;
+    private Integer viewCount;
 }
