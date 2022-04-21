@@ -12,6 +12,11 @@
 * Count the number of View for a Video
 * Storing the history of Watched Videos
 
+
+## Application Architecture
+
+  [![architecture.png](https://i.postimg.cc/3JQPZJFG/architecture.png)](https://postimg.cc/rzgnVTby)
+
 ## Backend
 
 
