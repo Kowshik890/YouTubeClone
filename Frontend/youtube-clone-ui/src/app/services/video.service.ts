@@ -20,7 +20,7 @@ export class VideoService {
     formData.append('file', fileEntry, fileEntry.name) // 'file' is written because in spring boot the requestparam is named as 'file'
 
     // HTTP post call to upload the video
-    return this.httpClient.post<UploadVideoResponse>(`${this.apiServiceURL}/api/videos/`, formData);
+    return this.httpClient.post<UploadVideoResponse>(`${this.apiServiceURL}/api/videos`, formData);
   }
 
   uploadThumbnail(fileEntry: File, videoId: string): Observable<string> {

@@ -7,6 +7,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -55,5 +57,40 @@ public class UserService {
         User currentUser = getCurrentUser();
         currentUser.addVideoToHistory(videoId);
         userRepository.save(currentUser);
+    }
+
+    public void subscribeUser(String userId) {
+        // Retrieve the current user and add the userId to the subscribed to users set
+        // Retrieve the target user and add the current user to the subscribers list
+
+        User currentUser = getCurrentUser();
+        currentUser.addToSubscribedToUsers(userId); // subscribe to other users
+
+        User user = getUserById(userId);              // other subscribe to my channel
+        user.addToSubscribers(userId);
+
+        userRepository.save(currentUser);
+        userRepository.save(user);
+    }
+
+    public void unsubscribeUser(String userId) {
+        User currentUser = getCurrentUser();
+        currentUser.removeFromSubscribedToUsers(userId); // subscribe to other users
+
+        User user = getUserById(userId);
+        user.removeFromSubscribers(userId);              // other subscribe to my channel
+
+        userRepository.save(currentUser);
+        userRepository.save(user);
+    }
+
+    public Set<String> userHistory(String userId) {
+        User user = getUserById(userId);
+        return user.getVideoHistory();
+    }
+
+    private User getUserById(String userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find user with userid - " + userId));
     }
 }

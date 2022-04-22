@@ -1,12 +1,17 @@
 package com.project.youtubeclone.service;
 
+import com.project.youtubeclone.datatransferobject.CommentDTO;
 import com.project.youtubeclone.datatransferobject.UploadVideoResponse;
+import com.project.youtubeclone.model.Comment;
 import com.project.youtubeclone.model.Video;
 import com.project.youtubeclone.datatransferobject.VideoDTO;
 import com.project.youtubeclone.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -152,5 +157,46 @@ public class VideoService {
         videoDTO.setDislikeCount(videoById.getDislikes().get());
         videoDTO.setViewCount(videoById.getViewCount().get());
         return videoDTO;
+    }
+
+    public void addComment(String videoId, CommentDTO commentDTO) {
+        Video video = findVideoById(videoId);
+
+        Comment comment = new Comment();
+        comment.setText(commentDTO.getCommentText());
+        comment.setAuthorId(commentDTO.getAuthorId());
+
+        video.addComment(comment);
+
+        videoRepository.save(video);
+    }
+
+    public List<CommentDTO> getAllComments(String videoId) {
+        Video video = findVideoById(videoId);
+        List<Comment> commentList = video.getCommentList();
+        // To map this list of comments into a list of commentDTO object
+        // to loop through this comment list, it will call mapToCommentDTO() one at a time
+        List<CommentDTO> list = new ArrayList<>();
+        for (Comment comment : commentList) {
+            CommentDTO commentDTO = mapToCommentDTO(comment);
+            list.add(commentDTO);
+        }
+        return list;
+    }
+
+    private CommentDTO mapToCommentDTO(Comment comment) {
+        CommentDTO commentDTO = new CommentDTO();
+        commentDTO.setCommentText(comment.getText());
+        commentDTO.setAuthorId(comment.getAuthorId());
+        return commentDTO;
+    }
+
+    public List<VideoDTO> getAllVideos() {
+        List<VideoDTO> list = new ArrayList<>();
+        for (Video video : videoRepository.findAll()) {
+            VideoDTO videoDTO = mapToVideoDTO(video);
+            list.add(videoDTO);
+        }
+        return list;
     }
 }
