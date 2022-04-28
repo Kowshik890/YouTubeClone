@@ -11,6 +11,7 @@
 * Storing Liked/Disliked Videos to User table
 * Count the number of View for a Video
 * Storing the history of Watched Videos
+*
 
 
 ## Application Architecture
