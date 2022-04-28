@@ -22,6 +22,9 @@ import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 import { HeaderComponent } from './components/header/header.component';
 import { UploadVideoComponent } from './components/upload-video/upload-video.component';
@@ -30,6 +33,13 @@ import { VideoPlayerComponent } from './components/video-player/video-player.com
 import { AuthConfigModule } from './auth/auth-config.module';
 import { VideoDetailComponent } from './components/video-detail/video-detail.component';
 import { AuthInterceptor, AuthModule  } from 'angular-auth-oidc-client';
+import { HomeComponent } from './components/home/home.component';
+import { HistoryComponent } from './components/history/history.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { LikedVideoComponent } from './components/liked-video/liked-video.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { FeaturedComponent } from './components/featured/featured.component';
+import { VideoCardComponent } from './components/video-card/video-card.component';
 
 
 
@@ -40,21 +50,20 @@ import { AuthInterceptor, AuthModule  } from 'angular-auth-oidc-client';
     HeaderComponent,
     SaveVideoDetailsComponent,
     VideoPlayerComponent,
-    VideoDetailComponent
+    VideoDetailComponent,
+    HomeComponent,
+    HistoryComponent,
+    SubscriptionsComponent,
+    LikedVideoComponent,
+    SidebarComponent,
+    FeaturedComponent,
+    VideoCardComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule,
     FormsModule,
-    /*AuthModule.forRoot({
-      config: {
-        secureRoutes: ['http://localhost:8080/'],
-        customParamsAuthRequest: {
-          audience: 'http://localhost:8080'
-      }
-      }
-    }),*/
     HttpClientModule,
     NgxFileDropModule,
     AppRoutingModule,
@@ -73,7 +82,10 @@ import { AuthInterceptor, AuthModule  } from 'angular-auth-oidc-client';
     VgOverlayPlayModule,
     VgBufferingModule,
     MatSnackBarModule,
-    AuthConfigModule
+    AuthConfigModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule
   ],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]

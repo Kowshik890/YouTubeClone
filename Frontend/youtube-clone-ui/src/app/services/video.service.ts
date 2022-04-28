@@ -42,4 +42,8 @@ export class VideoService {
   saveVideoDetails(videoMetaData: VideoDTO): Observable<VideoDTO> {
     return this.httpClient.put<VideoDTO>(`${this.apiServiceURL}/api/videos`, videoMetaData);
   }
+
+  getAllVideos(): Observable<Array<VideoDTO>> {
+    return this.httpClient.get<Array<VideoDTO>>(`${this.apiServiceURL}/api/videos`);
+  }
 } 

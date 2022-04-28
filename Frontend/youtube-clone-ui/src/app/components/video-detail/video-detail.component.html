@@ -3,12 +3,12 @@
         <app-video-player *ngIf="videoAvailable" [videoURL]="videoURL"></app-video-player>
         <div class="mat-title">{{videoTitle}}</div>
         <div fxLayout="row">
-            <div fxFlex="50%">
-                <div>3rd Feb</div>
-                <span>{{videoDescription}}</span>
-            </div>
-            <div fxFlex="50%">
-
+            <div fxFlex="100%">
+                <span>{{viewCount}} Views</span>&nbsp;
+                <span class="seperator"></span>&nbsp;
+                <span>Apr 21, 2022</span><hr>
+                <div><mat-card-title>Description</mat-card-title></div>
+                <div style="padding-top: 5px;">{{videoDescription}}</div>
             </div>
         </div>
     </div>

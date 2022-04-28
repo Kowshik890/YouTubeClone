@@ -1,0 +1,12 @@
+.content {
+    padding: 16px;
+}
+
+.content > mat-card {
+    width: 200px;
+}
+
+.example-header-image {
+    background-image: url('../../../assets/kd.jpg');
+    background-size: cover;
+  }

@@ -2,3 +2,11 @@
     margin-left: 100px;
     margin-top: 50px;
 }
+
+.seperator {
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    background-color: rgb(54, 53, 53);
+    display: inline-block;
+}
