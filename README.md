@@ -11,7 +11,10 @@
 * Storing Liked/Disliked Videos to User table
 * Count the number of View for a Video
 * Storing the history of Watched Videos
-*
+* User can Login/Logout using Single Sign On
+* User can comment on Videos
+* User can view the History of Videos he/she watched
+* User can view the List of Videos he/she Liked
 
 
 ## Application Architecture
