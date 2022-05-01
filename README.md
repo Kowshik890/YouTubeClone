@@ -2,17 +2,23 @@
 ## This project is developed using Angular, Spring Boot, MongoDB and Auth0.
 
 ## Project Functionalities
-* Upload new Videos using AWS S3
+* User can upload new Videos using AWS S3
 * Upload Thumbnails for the Videos using AWS S3
-* Store Video, Thumbnail along with other parameters
+* Store Video, Thumbnail along with other video information e.g. Title, Description, Tags ...
 * View uploaded Videos with details
+* Viewer can see the number of views of that video
+* Number of likes or dislikes of that video
 * User Registration using Auth0
-* Like/Dislike counting for specific Videos
 * Storing Liked/Disliked Videos to User table
-* Count the number of View for a Video
+* Store the number of view for a Video in DB
 * Storing the history of Watched Videos
-*
-
+* User can view the History of Videos he/she watched
+* User can Login/Logout using Single Sign On
+* User can comment on Videos
+* Comments are stored in DB
+* User can view the List of Videos he/she Liked
+* User can subscribe and unsubscribe 
+* User can watch video from suggested bar
 
 ## Application Architecture
 
