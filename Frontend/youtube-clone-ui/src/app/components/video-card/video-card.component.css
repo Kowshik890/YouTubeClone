@@ -9,4 +9,12 @@
 .example-header-image {
     background-image: url('../../../assets/kd.jpg');
     background-size: cover;
-  }
+}
+
+.hidden_overflow {
+    display: inline-block;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}

@@ -21,4 +21,5 @@ public class  VideoDTO {
     private Integer likeCount;
     private Integer dislikeCount;
     private Integer viewCount;
+    private String uploadedDate;
 }

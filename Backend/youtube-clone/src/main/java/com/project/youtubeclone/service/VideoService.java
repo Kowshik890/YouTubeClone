@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,8 +27,10 @@ public class VideoService {
         String videoURL = awss3Service.uploadFile(file);
 
         // Save uploaded video URL to database
+        Date date = new Date();
         var video = new Video();
         video.setVideoUrl(videoURL);
+        video.setUploadedDate(date.toString());
         Video savedVideo = videoRepository.save(video);
         return new UploadVideoResponse(savedVideo.getId(), savedVideo.getVideoUrl());
     }
@@ -42,6 +45,7 @@ public class VideoService {
         savedVideo.setTags(videoDTO.getTags());
         savedVideo.setVideoStatus(videoDTO.getVideoStatus());
         savedVideo.setThumbnailUrl(videoDTO.getThumbnailUrl());
+        savedVideo.setUploadedDate(videoDTO.getUploadedDate());
 
         // Save the video to the database
         videoRepository.save(savedVideo);
@@ -54,7 +58,7 @@ public class VideoService {
 
         // Upload file to AWS S3
         String thumbnailURL = awss3Service.uploadFile(file);
-
+        System.out.println("ThumbnailURL: " + thumbnailURL);
         // Save uploaded video URL to database
         savedVideo.setThumbnailUrl(thumbnailURL);
         videoRepository.save(savedVideo);
@@ -156,6 +160,7 @@ public class VideoService {
         videoDTO.setLikeCount(videoById.getLikes().get());
         videoDTO.setDislikeCount(videoById.getDislikes().get());
         videoDTO.setViewCount(videoById.getViewCount().get());
+        videoDTO.setUploadedDate(videoById.getUploadedDate());
         return videoDTO;
     }
 

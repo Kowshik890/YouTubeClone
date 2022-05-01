@@ -31,6 +31,7 @@ public class Video {
     private AtomicInteger viewCount = new AtomicInteger(0);
     private String thumbnailUrl;
     private List<Comment> commentList = new CopyOnWriteArrayList<>();
+    private String uploadedDate;
 
     public void incrementLikes() {
         likes.incrementAndGet();

@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { VideoService } from 'src/app/services/video.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { VideoDTO } from 'src/app/datatransferobject/video-dto';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-save-video-details',
@@ -28,6 +29,7 @@ export class SaveVideoDetailsComponent implements OnInit {
   fileSelected: boolean = false;
   videoURL!: string;
   thumbnailURL!: string;
+  uploadedDate!: string;
 
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService, private matSnackBar: MatSnackBar) { 
     this.videoId = this.activatedRoute.snapshot.params['videoId'];
@@ -35,6 +37,7 @@ export class SaveVideoDetailsComponent implements OnInit {
     .subscribe(data => {
       this.videoURL = data.videoUrl;
       this.thumbnailURL = data.thumbnailUrl;
+      this.uploadedDate = data.uploadedDate;
     })
     this.saveVideoDetailsForm = new FormGroup({
       title: this.title,
@@ -76,13 +79,14 @@ export class SaveVideoDetailsComponent implements OnInit {
     // First need the videoId and file
     this.videoService.uploadThumbnail(this.selectedFile, this.videoId)
     .subscribe(data => { // to store the response from video-service.ts
-      console.log(data);
+      this.thumbnailURL = data;
       // show an upload notification
       this.matSnackBar.open("Thumbnail upload successfully!", "OK");
     })
   }
 
   saveVideoDetails() {
+    console.log("Thumbnail: "+this.thumbnailURL);
     const videoMetaData: VideoDTO = {
       id: this.videoId,
       title: this.saveVideoDetailsForm.get('title')?.value,
@@ -93,7 +97,8 @@ export class SaveVideoDetailsComponent implements OnInit {
       thumbnailUrl: this.thumbnailURL,
       likeCount: 0,
       dislikeCount: 0,
-      viewCount: 0
+      viewCount: 0,
+      uploadedDate: this.uploadedDate
     } 
     this.videoService.saveVideoDetails(videoMetaData)
     .subscribe(data => {

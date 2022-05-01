@@ -40,6 +40,7 @@ import { LikedVideoComponent } from './components/liked-video/liked-video.compon
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FeaturedComponent } from './components/featured/featured.component';
 import { VideoCardComponent } from './components/video-card/video-card.component';
+import { CallbackComponent } from './components/callback/callback.component';
 
 
 
@@ -57,7 +58,8 @@ import { VideoCardComponent } from './components/video-card/video-card.component
     LikedVideoComponent,
     SidebarComponent,
     FeaturedComponent,
-    VideoCardComponent
+    VideoCardComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,

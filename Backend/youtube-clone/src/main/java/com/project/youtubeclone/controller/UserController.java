@@ -23,8 +23,7 @@ public class UserController {
     public String register(Authentication authentication) { // Authentication class is used to read the JSON web
         // token coming from the http client or angular app.
         Jwt jwt = (Jwt) authentication.getPrincipal();
-        userRegistrationService.registerUser(jwt.getTokenValue());
-        return "User registration successful.";
+        return userRegistrationService.registerUser(jwt.getTokenValue());
     }
 
     @PostMapping("/subscribe/{userId}")

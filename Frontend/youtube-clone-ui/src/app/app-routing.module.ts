@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CallbackComponent } from './components/callback/callback.component';
 import { FeaturedComponent } from './components/featured/featured.component';
 import { HistoryComponent } from './components/history/history.component';
 import { HomeComponent } from './components/home/home.component';
@@ -35,6 +36,9 @@ const routes: Routes = [
   },
   {
     path: 'video-details/:videoId', component: VideoDetailComponent
+  },
+  {
+    path: 'callback', component: CallbackComponent
   }
 ];
 

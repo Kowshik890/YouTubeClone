@@ -46,4 +46,12 @@ export class VideoService {
   getAllVideos(): Observable<Array<VideoDTO>> {
     return this.httpClient.get<Array<VideoDTO>>(`${this.apiServiceURL}/api/videos`);
   }
+
+  likeVideo(videoId: string): Observable<VideoDTO> {
+    return this.httpClient.post<VideoDTO>(`${this.apiServiceURL}/api/videos/` + videoId + `/like`, null);
+  }
+
+  dislikeVideo(videoId: string): Observable<VideoDTO> {
+    return this.httpClient.post<VideoDTO>(`${this.apiServiceURL}/api/videos/` + videoId + `/dislike`, null);
+  }
 } 
