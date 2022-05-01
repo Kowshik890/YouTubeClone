@@ -18,6 +18,7 @@
 * Comments are stored in DB
 * User can view the List of Videos he/she Liked
 * User can subscribe and unsubscribe 
+* User can watch video from suggested bar
 
 ## Application Architecture
 
