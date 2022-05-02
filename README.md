@@ -25,12 +25,14 @@
   [![architecture.png](https://i.postimg.cc/3JQPZJFG/architecture.png)](https://postimg.cc/rzgnVTby)
 
 ## Backend
-
+* Photos and Videos are saved in AWS S3 Bucket
+* Auth0 is used for security
+* JSON Web Token (JWT) based registration and authorization
+* Usage of Data Transfer Object (DTO) concept
 
 
 
 ## Frontend
  
  
-
 
