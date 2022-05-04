@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.oidcSecurityService.logoff();
+    this.oidcSecurityService.logoffLocal();
   }
 
 }

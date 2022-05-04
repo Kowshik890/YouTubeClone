@@ -1,3 +1,8 @@
 .example-spacer {
     flex: 1 1 auto;
   }
+
+.header_Text {
+  font-size: 28px;
+  color: white;
+}

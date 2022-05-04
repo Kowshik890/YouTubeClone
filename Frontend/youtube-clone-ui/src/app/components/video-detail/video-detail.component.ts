@@ -36,7 +36,7 @@ export class VideoDetailComponent implements OnInit {
       this.dislikeCount = data.dislikeCount;
       this.viewCount = data.viewCount;
       this.videoAvailable = true;
-      this.uploadedDate = data.uploadedDate.replace('CEST', '');
+      this.uploadedDate = data.uploadedDate.split('T', 1);
       console.log("Date: " + this.uploadedDate);
     })
   }

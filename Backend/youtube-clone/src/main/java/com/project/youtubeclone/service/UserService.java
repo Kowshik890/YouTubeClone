@@ -2,6 +2,7 @@ package com.project.youtubeclone.service;
 
 import com.project.youtubeclone.model.User;
 import com.project.youtubeclone.repository.UserRepository;
+import exception.YoutubeCloneException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -92,5 +93,10 @@ public class UserService {
     private User getUserById(String userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find user with userid - " + userId));
+    }
+
+    public Set<String> getLikedVideos(String userId) {
+        var user = userRepository.findById(userId).orElseThrow(() -> new YoutubeCloneException("Invalid user - " + userId));
+        return user.getLikedVideos();
     }
 }

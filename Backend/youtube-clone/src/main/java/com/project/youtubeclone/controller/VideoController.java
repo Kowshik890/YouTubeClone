@@ -71,4 +71,10 @@ public class VideoController {
     public List<VideoDTO> getAllVideos() {
         return videoService.getAllVideos();
     }
+
+    @GetMapping("suggested/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<VideoDTO> getSuggestedVideos(@PathVariable String userId) {
+        return videoService.getSuggestedVideos(userId);
+    }
 }

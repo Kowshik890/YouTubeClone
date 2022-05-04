@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -199,6 +201,16 @@ public class VideoService {
     public List<VideoDTO> getAllVideos() {
         List<VideoDTO> list = new ArrayList<>();
         for (Video video : videoRepository.findAll()) {
+            VideoDTO videoDTO = mapToVideoDTO(video);
+            list.add(videoDTO);
+        }
+        return list;
+    }
+
+    public List<VideoDTO> getSuggestedVideos(String userId) {
+        Set<String> likedVideos = userService.getLikedVideos(userId);
+        List<VideoDTO> list = new ArrayList<>();
+        for (Video video : videoRepository.findByIdIn(likedVideos)) {
             VideoDTO videoDTO = mapToVideoDTO(video);
             list.add(videoDTO);
         }

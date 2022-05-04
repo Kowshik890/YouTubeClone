@@ -23,11 +23,13 @@ export class UserService {
 
   getRegisteredUserId() {
     return this.httpClient.get(`${this.apiServiceURL}/api/user/register/`, { responseType: 'text' }).subscribe(response => {
+      console.log(response);
       this.userId = response;
     });
   }
 
   getUserId(): string {
+    console.log("user: "+this.userId);
     return this.userId;
   }
 }

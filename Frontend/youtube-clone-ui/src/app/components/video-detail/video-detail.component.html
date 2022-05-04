@@ -50,8 +50,10 @@
         <mat-chip-list>
             <mat-chip *ngFor="let tag of tags">{{tag}}</mat-chip>
         </mat-chip-list>
+        <mat-divider></mat-divider>
+        <app-comments [videoId]="videoId"></app-comments>
       </div>
     </div>
     <div fxFlex="5%"></div>
-    <div fxFlex="30%" class="suggestion-bar">Suggestion Bar </div>
+    <div fxFlex="30%" class="suggestion-bar"><app-suggestion-bar></app-suggestion-bar></div>
   </div>

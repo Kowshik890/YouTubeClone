@@ -5,11 +5,11 @@ import { UserService } from 'src/app/services/user.service';
 import { VideoService } from 'src/app/services/video.service';
 
 @Component({
-  selector: 'app-liked-video',
-  templateUrl: './liked-video.component.html',
-  styleUrls: ['./liked-video.component.css']
+  selector: 'app-suggestion-bar',
+  templateUrl: './suggestion-bar.component.html',
+  styleUrls: ['./suggestion-bar.component.css']
 })
-export class LikedVideoComponent implements OnInit {
+export class SuggestionBarComponent implements OnInit {
 
   suggestedVideos: Array<VideoDTO> = [];
   getSuggestedVideosSubscription!: Subscription;
@@ -21,6 +21,7 @@ export class LikedVideoComponent implements OnInit {
       this.suggestedVideos = data;
     });
   }
+
   ngOnInit(): void {
   }
 

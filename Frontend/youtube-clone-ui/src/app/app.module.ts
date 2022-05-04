@@ -25,6 +25,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { HeaderComponent } from './components/header/header.component';
 import { UploadVideoComponent } from './components/upload-video/upload-video.component';
@@ -41,6 +42,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FeaturedComponent } from './components/featured/featured.component';
 import { VideoCardComponent } from './components/video-card/video-card.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { SuggestionBarComponent } from './components/suggestion-bar/suggestion-bar.component';
 
 
 
@@ -59,7 +62,9 @@ import { CallbackComponent } from './components/callback/callback.component';
     SidebarComponent,
     FeaturedComponent,
     VideoCardComponent,
-    CallbackComponent
+    CallbackComponent,
+    CommentsComponent,
+    SuggestionBarComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +92,8 @@ import { CallbackComponent } from './components/callback/callback.component';
     AuthConfigModule,
     MatSidenavModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]

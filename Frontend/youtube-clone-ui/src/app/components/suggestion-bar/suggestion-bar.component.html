@@ -1,0 +1,14 @@
+<div fxLayout="column wrap" fxLayoutGap="16px grid">
+    <h2 style="margin: 5%;">Suggested Video</h2>
+    <div fxFlex="5%" *ngFor="let video of suggestedVideos">
+      <div class="content">
+        <mat-card class="mat-elevation-z4" routerLink="/video-details/{{video.id}}">
+          <mat-card-header>
+            <img mat-card-image [src]="video.thumbnailUrl" alt="Thumbnail" height="150" style="position: left;" routerLink="/video-details/{{video.id}}">
+            <b style="padding-left: 10%;" routerLink="/video-details/{{video.id}}">{{video.title}}</b>
+          </mat-card-header>
+          <!-- <span>{{video.viewCount}} Views</span> -->
+        </mat-card>
+    </div>
+    </div>
+  </div>
