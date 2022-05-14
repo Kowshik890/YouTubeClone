@@ -1,5 +1,5 @@
 # YouTube Clone 
-## This project is developed using Angular, Spring Boot, MongoDB and Auth0.
+## This project is developed using Angular, Spring Boot, MongoDB, JWT Authentication using Spring Security and AWS S3 Bucket. 
 
 ## Project Functionalities
 * User can upload new Videos using AWS S3
