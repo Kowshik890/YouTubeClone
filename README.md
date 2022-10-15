@@ -82,4 +82,4 @@
 
 [![5.png](https://i.postimg.cc/0rgL0pdP/5.png)](https://postimg.cc/0KfW8KBB)
 
-* N.B: Few features are in under development
+* N.B: Few features are under development
